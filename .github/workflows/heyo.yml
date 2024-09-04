@@ -1,10 +1,18 @@
 on: push
+permissions:
+  contents: write
 jobs:
-  job1:
+  create-react-app:
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
-  job2:
-    runs-on: windows-latest
-    steps:
-      - run: node --version
+      - name: 读取仓库
+        uses: actions/checkout@v4
+      - name: 安装依赖
+        run: |
+          npm install
+          npm run build
+      - name: deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build
