@@ -2,21 +2,22 @@ on: push
 permissions:
   contents: write
 jobs:
-  create-react-app:
+  # create-react-app:
+  dockerbuild:
     runs-on: ubuntu-latest
     steps:
       - name: 读取仓库
         uses: actions/checkout@v4
-      - name: 安装依赖
-        run: |
-          npm install
-          npm run build
+      # - name: 安装依赖
+      #   run: |
+      #     npm install
+      #     npm run build
       # - name: deploy
       #   uses: JamesIves/github-pages-deploy-action@v4
       #   with:
       #     branch: gh-pages
       #     folder: build
-      - name: 部署dockerhub
+      - name: 登录dockerhub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
